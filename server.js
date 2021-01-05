@@ -86,5 +86,23 @@ app.route('/users/:id')
 
 // DELETE
 .delete((req,res)=>{
-  // User.findByIdAndDelete()
+  User.findByIdAndDelete(req.params.id,
+    (err, data)=>{
+      if(err){
+        res.json({
+          success: false,
+          message: err
+        })
+      }else if(!data){
+        res.json({
+          success: false,
+          messgae: "Not Found"
+        })
+      }else{
+        res.json({
+          success: true,
+          data: data
+        })
+      }
+    })
 })
